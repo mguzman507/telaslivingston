@@ -4,31 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Telas Livingston — Catálogo Premium · Desde 1960</title>
-
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website">
+<meta property="og:title" content="Telas Livingston — Telas finas · Desde 1960">
+<meta property="og:description" content="Más de 60 años seleccionando fibras naturales y tejidos de autor. Envíos a toda Panamá. Cotiza en línea.">
+<meta property="og:image" content="og-image.jpg">
 <meta property="og:url" content="https://telaslivingston.com">
-<meta property="og:title" content="Telas Livingston — Catálogo Premium · Desde 1960">
-<meta property="og:description" content="Telas finas seleccionadas para diseñadores, sastres y creadores. Más de 60 años de trayectoria seleccionando fibras naturales y tejidos de autor.">
-<meta property="og:image" content="https://telaslivingston.com/assets/og-image.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:locale" content="es_ES">
-<meta property="og:site_name" content="Telas Livingston">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_PA">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Telas Livingston — Telas finas · Desde 1960">
+<meta name="twitter:description" content="Más de 60 años seleccionando fibras naturales y tejidos de autor. Envíos a toda Panamá.">
+<meta name="twitter:image" content="og-image.jpg">
 
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image">
-<meta property="twitter:url" content="https://telaslivingston.com">
-<meta property="twitter:title" content="Telas Livingston — Catálogo Premium · Desde 1960">
-<meta property="twitter:description" content="Telas finas seleccionadas para diseñadores, sastres y creadores. Más de 60 años de trayectoria seleccionando fibras naturales y tejidos de autor.">
-<meta property="twitter:image" content="https://telaslivingston.com/assets/og-image.jpg">
-
-<!-- SEO básico -->
-<meta name="description" content="Catálogo premium de telas finas: algodón egipcio, lino belga, seda natural, denim japonés y lana merino. Desde 1960 para sastres y diseñadores.">
-<meta name="keywords" content="telas, telas finas, algodón, lino, seda, mezclilla, lana, sastrería, diseño de moda, telas por metro">
-<meta name="author" content="Telas Livingston">
-<meta name="theme-color" content="#1a2332">
-<link rel="canonical" href="https://telaslivingston.com">
 <style>
   :root {
     --primary: #1a2332;
@@ -710,7 +696,7 @@
 <!-- TOP BAR -->
 <div class="topbar">
   <div class="wrap">
-    <div>📍 Centro Comercial El dorado, Panamá · Lun–Sáb 10:00–19:00</div>
+    <div>📍 Centro Comercial El Dorado, Ciudad de Panamá · Lun–Sáb 10:00–19:00</div>
     <div class="topbar-links">
       <a href="#">Atención mayorista</a>
       <a href="#">Envíos nacionales</a>
@@ -875,7 +861,7 @@
       <div class="corp-card">
         <span class="num">02</span>
         <h3>Muestras sin costo</h3>
-        <p>Solicita hasta 5 muestras gratuitas por pedido. Te las enviamos a cualquier punto de la República Mexicana en 48 horas.</p>
+        <p>Solicita hasta 5 muestras gratuitas por pedido. Te las enviamos a cualquier punto de la Panamá en 48 horas.</p>
       </div>
       <div class="corp-card">
         <span class="num">03</span>
@@ -920,15 +906,15 @@
     <div class="foot-col">
       <h4>Contacto</h4>
       <ul>
-        <li><a href="#">hola@livingston.mx</a></li>
-        <li><a href="#">+52 55 1234 5678</a></li>
+        <li><a href="#">hola@telaslivingston.com</a></li>
+        <li><a href="#">+507 6403 0031</a></li>
         <li><a href="#">Av. Insurgentes 1240</a></li>
-        <li><a href="#">CDMX, México</a></li>
+        <li><a href="#">Ciudad de Panamá, Panamá</a></li>
       </ul>
     </div>
   </div>
   <div class="foot-bottom">
-    <div>© 2026 Telas Livingston S.A. de C.V. — Todos los derechos reservados.</div>
+    <div>© 2026 Telas Livingston S.A. — Todos los derechos reservados.</div>
     <div>Aviso de privacidad · Términos y condiciones</div>
   </div>
 </footer>
@@ -1083,7 +1069,7 @@ function render() {
             <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>${p.origin}</span>
           </div>
           <div class="row">
-            <div class="price">$${p.price.toLocaleString('es-MX',{minimumFractionDigits:2})}<span class="price-unit">MXN / m</span></div>
+            <div class="price">$${p.price.toLocaleString('es-MX',{minimumFractionDigits:2})}<span class="price-unit">USD / m</span></div>
             <button class="btn-add" onclick="addToCart(${p.id})">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
               Cotizar
@@ -1157,7 +1143,7 @@ function checkout() {
     return `· ${p.name} x${cart[id]} m = $${(p.price*cart[id]).toLocaleString('es-MX',{minimumFractionDigits:2})}`;
   }).join('\n');
   const total = ids.reduce((s,i)=>s+fabrics.find(x=>x.id===i).price*cart[i],0);
-  const msg = `Hola Telas Livingston, me interesa cotizar:\n\n${lines}\n\nTotal estimado: $${total.toLocaleString('es-MX',{minimumFractionDigits:2})} MXN`;
+  const msg = `Hola Telas Livingston, me interesa cotizar:\n\n${lines}\n\nTotal estimado: $${total.toLocaleString('es-MX',{minimumFractionDigits:2})} USD`;
   window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`,'_blank');
 }
 
