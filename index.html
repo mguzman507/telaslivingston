@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Telas Livingston — Catálogo Premium</title>
+<style>
+  :root {
+    --text-primary: #111;
+    --text-secondary: #555;
+    --text-tertiary: #888;
+    --text-quaternary: #bbb;
+    --surface: #fff;
+    --surface-raised: #fff;
+    --surface-muted: #f5f5f5;
+    --border: #e5e5e5;
+    --danger: #d32f2f;
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --t-fast: 150ms;
+    --ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --text-primary: #f0f0f0;
+      --text-secondary: #aaa;
+      --text-tertiary: #777;
+      --text-quaternary: #555;
+      --surface: #0d0d0d;
+      --surface-raised: #1a1a1a;
+      --surface-muted: #222;
+      --border: #333;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-sans);
+    color: var(--text-primary);
+    background: var(--surface);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 24px 16px; }
+  .hero {
+    text-align: center;
+    padding: 48px 16px 40px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 32px;
+  }
+  .hero h1 {
+    font-size: 36px;
+    font-weight: 500;
+    margin: 0 0 8px;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+  }
+  .hero p {
+    font-size: 16px;
+    color: var(--text-secondary);
+    margin: 0;
+    font-weight: 400;
+  }
+  .bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; }
+  .pill {
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 7px 16px;
+    font-size: 13px;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: all var(--t-fast) var(--ease-out);
+    font-weight: 400;
+    font-family: inherit;
+  }
+  .pill:hover { border-color: var(--text-primary); color: var(--text-primary); }
+  .pill.active { background: var(--text-primary); color: var(--surface); border-color: var(--text-primary); }
+  .search-wrap { position: relative; min-width: 240px; }
+  .search-wrap svg {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-tertiary);
+    width: 16px;
+    height: 16px;
+  }
+  .search-wrap input {
+    width: 100%;
+    padding: 9px 12px 9px 36px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: transparent;
+    color: var(--text-primary);
+    font-size: 14px;
+    outline: none;
+    transition: border-color var(--t-fast) var(--ease-out);
+    font-family: inherit;
+  }
+  .search-wrap input:focus { border-color: var(--text-primary); }
+  .search-wrap input::placeholder { color: var(--text-quaternary); }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  @media (max-width: 768px) { .grid { grid-template-columns: repeat(2, 1fr); gap: 16px; } }
+  @media (max-width: 480px) { .grid { grid-template-columns: 1fr; } }
+
+  .card {
+    position: relative;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    background: transparent;
+    transition: transform var(--t-fast) var(--ease-out), box-shadow var(--t-fast) var(--ease-out);
+    cursor: pointer;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  }
+  .swatch {
+    height: 220px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+  .swatch svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .tag {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: var(--surface-raised);
+    border: 1px solid var(--border);
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    color: var(--text-secondary);
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+  }
+  .info { padding: 16px; }
+  .name { font-size: 15px; font-weight: 500; margin: 0 0 6px; line-height: 1.35; }
+  .detail { font-size: 13px; color: var(--text-tertiary); margin-bottom: 14px; }
+  .row { display: flex; align-items: center; justify-content: space-between; }
+  .price {
+    font-size: 18px;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.3px;
+  }
+  .price span { font-size: 12px; font-weight: 400; color: var(--text-tertiary); margin-left: 2px; }
+  .btn {
+    background: var(--text-primary);
+    color: var(--surface);
+    border: none;
+    border-radius: 8px;
+    padding: 8px 18px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity var(--t-fast) var(--ease-out);
+    font-family: inherit;
+  }
+  .btn:hover { opacity: 0.85; }
+  .btn:active { transform: scale(0.97); }
+
+  /* Carrito */
+  .cart-fab {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--text-primary);
+    color: var(--surface);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    z-index: 50;
+    transition: transform var(--t-fast) var(--ease-out);
+  }
+  .cart-fab:hover { transform: scale(1.05); }
+  .cart-fab:active { transform: scale(0.95); }
+  .cart-badge {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    background: var(--danger);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 500;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 400px;
+    max-width: 92vw;
+    height: 100%;
+    background: var(--surface-raised);
+    border-left: 1px solid var(--border);
+    transform: translateX(105%);
+    transition: transform 250ms var(--ease-out);
+    z-index: 60;
+    display: flex;
+    flex-direction: column;
+  }
+  .drawer.open { transform: translateX(0); }
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.2);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 250ms var(--ease-out);
+    z-index: 55;
+  }
+  .overlay.open { opacity: 1; pointer-events: auto; }
+  .dhead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .dhead h2 { font-size: 18px; font-weight: 500; margin: 0; }
+  .dhead button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--text-secondary);
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background var(--t-fast) var(--ease-out);
+  }
+  .dhead button:hover { background: var(--surface-muted); }
+  .dbody { flex: 1; overflow: auto; padding: 20px 24px; }
+  .dfoot { padding: 20px 24px; border-top: 1px solid var(--border); }
+  .item { display: flex; gap: 14px; align-items: center; margin-bottom: 20px; }
+  .item-thumb {
+    width: 64px;
+    height: 64px;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 1px solid var(--border);
+  }
+  .item-thumb svg { width: 100%; height: 100%; }
+  .item-info { flex: 1; min-width: 0; }
+  .item-name { font-size: 14px; font-weight: 500; margin: 0 0 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .item-meta { font-size: 12px; color: var(--text-tertiary); margin-bottom: 6px; }
+  .item-row { display: flex; align-items: center; gap: 10px; }
+  .item-price { font-size: 14px; font-weight: 500; font-variant-numeric: tabular-nums; }
+  .qty { display: flex; align-items: center; gap: 4px; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+  .qty button {
+    width: 28px;
+    height: 28px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background var(--t-fast) var(--ease-out);
+  }
+  .qty button:hover { background: var(--surface-muted); }
+  .qty span { font-size: 13px; font-variant-numeric: tabular-nums; min-width: 22px; text-align: center; font-weight: 500; }
+  .dtotal { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+  .dtotal-label { font-size: 14px; color: var(--text-secondary); }
+  .dtotal-val { font-size: 24px; font-weight: 500; font-variant-numeric: tabular-nums; letter-spacing: -0.5px; }
+  .dcheckout {
+    width: 100%;
+    padding: 14px;
+    background: var(--text-primary);
+    color: var(--surface);
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity var(--t-fast) var(--ease-out);
+    font-family: inherit;
+  }
+  .dcheckout:hover { opacity: 0.9; }
+  .empty { text-align: center; padding: 60px 20px; color: var(--text-tertiary); }
+  .empty svg { width: 56px; height: 56px; margin-bottom: 16px; opacity: 0.35; }
+  .toast {
+    position: fixed;
+    bottom: 88px;
+    left: 50%;
+    transform: translateX(-50%) translateY(12px);
+    background: var(--text-primary);
+    color: var(--surface);
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 500;
+    opacity: 0;
+    pointer-events: none;
+    transition: all var(--t-fast) var(--ease-out);
+    z-index: 70;
+    white-space: nowrap;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="hero">
+    <h1>Telas Livingston</h1>
+    <p>Telas finas seleccionadas para diseñadores, sastres y creadores</p>
+  </div>
+
+  <div class="bar">
+    <div class="filters" id="filters"></div>
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24" fill="none" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text-tertiary);width:16px;height:16px;">
+        <path d="M11.5 3C16.1944 3 20 6.80558 20 11.5C20 13.523 19.2933 15.381 18.1132 16.8404L21.1364 19.8636C21.4879 20.2151 21.4879 20.7849 21.1364 21.1364C20.7849 21.4879 20.2151 21.4879 19.8636 21.1364L16.8404 18.1132C15.381 19.2933 13.523 20 11.5 20C6.80558 20 3 16.1944 3 11.5C3 6.80558 6.80558 3 11.5 3ZM11.5 18.2C15.2003 18.2 18.2 15.2003 18.2 11.5C18.2 7.79969 15.2003 4.8 11.5 4.8C7.79969 4.8 4.8 7.79969 4.8 11.5C4.8 15.2003 7.79969 18.2 11.5 18.2Z" fill="currentColor"/>
+      </svg>
+      <input id="search" placeholder="Buscar por nombre, textura o color..." oninput="render()">
+    </div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+</div>
+
+<button class="cart-fab" onclick="toggleCart()">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+    <path d="M6 6h15l-1.5 9h-12z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <circle cx="9" cy="20" r="1.3" fill="currentColor"/>
+    <circle cx="18" cy="20" r="1.3" fill="currentColor"/>
+    <path d="M6 6L5 3H2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <span class="cart-badge" id="badge" style="display:none">0</span>
+</button>
+
+<div class="overlay" id="overlay" onclick="toggleCart()"></div>
+<div class="drawer" id="drawer">
+  <div class="dhead">
+    <h2>Tu selección</h2>
+    <button onclick="toggleCart()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <path d="M17.9542 4.77253C18.3056 4.42106 18.8761 4.42106 19.2276 4.77253C19.579 5.12401 19.579 5.69452 19.2276 6.04597L13.2735 12.0001L19.2276 17.9542C19.5791 18.3056 19.5791 18.8761 19.2276 19.2276C18.8761 19.5791 18.3056 19.5791 17.9542 19.2276L12.0001 13.2735L6.04595 19.2276C5.69451 19.5791 5.12399 19.579 4.77252 19.2276C4.42104 18.8761 4.42104 18.3056 4.77252 17.9542L10.7266 12.0001L4.77252 6.04597C4.42104 5.6945 4.42104 5.124 4.77252 4.77253C5.12399 4.42107 5.69448 4.42106 6.04595 4.77253L12.0001 10.7266L17.9542 4.77253Z" fill="currentColor"/>
+      </svg>
+    </button>
+  </div>
+  <div class="dbody" id="dbody"></div>
+  <div class="dfoot" id="dfoot" style="display:none">
+    <div class="dtotal">
+      <span class="dtotal-label">Total estimado</span>
+      <span class="dtotal-val" id="dtotal">$0.00</span>
+    </div>
+    <button class="dcheckout" onclick="checkout()">Solicitar cotización por WhatsApp</button>
+  </div>
+</div>
+
+<div class="toast" id="toast">Agregado al carrito</div>
+
+<script>
+const fabrics = [
+  {id:1, name:"Popelina egipcio 120 hilos", cat:"Algodón", price:145, color:"#E8DFD0", texture:"cotton", weight:"120 g/m²"},
+  {id:2, name:"Lino belga prelavado", cat:"Lino", price:340, color:"#D6C9A8", texture:"linen", weight:"180 g/m²"},
+  {id:3, name:"Seda habotai natural", cat:"Seda", price:590, color:"#F7EDE0", texture:"silk", weight:"45 g/m²"},
+  {id:4, name:"Denim selvedge 14 oz", cat:"Mezclilla", price:285, color:"#2B3A55", texture:"denim", weight:"420 g/m²"},
+  {id:5, name:"Tafetán poliéster premium", cat:"Poliéster", price:98, color:"#C8B8D8", texture:"taffeta", weight:"85 g/m²"},
+  {id:6, name:"Gabardina de lana merino", cat:"Lana", price:480, color:"#7A6B52", texture:"gabardine", weight:"260 g/m²"},
+  {id:7, name:"Gasa doble de algodón", cat:"Algodón", price:135, color:"#F2EFE8", texture:"gauze", weight:"70 g/m²"},
+  {id:8, name:"Charmeuse de seda 22 momme", cat:"Seda", price:740, color:"#D4AF37", texture:"charmeuse", weight:"110 g/m²"},
+  {id:9, name:"Lino rústico irlandés", cat:"Lino", price:395, color:"#B5A684", texture:"rustic", weight:"200 g/m²"},
+  {id:10, name:"Denim crudo 16 oz", cat:"Mezclilla", price:310, color:"#1E2B3D", texture:"rawdenim", weight:"480 g/m²"},
+  {id:11, name:"Chiffon poliéster", cat:"Poliéster", price:88, color:"#EAEAEA", texture:"chiffon", weight:"55 g/m²"},
+  {id:12, name:"Tweed escocés Harris", cat:"Lana", price:560, color:"#5E4F42", texture:"tweed", weight:"340 g/m²"}
+];
+const cats = ["Todos","Algodón","Lino","Seda","Mezclilla","Poliéster","Lana"];
+let activeCat = "Todos";
+let cart = {};
+
+function texSVG(color, type) {
+  const patterns = {
+    cotton: `<defs><pattern id="c" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="4" fill="${color}"/><path d="M0 4L4 0" stroke="rgba(0,0,0,0.06)" stroke-width="0.6"/><path d="M0 0L4 4" stroke="rgba(0,0,0,0.04)" stroke-width="0.4"/></pattern></defs><rect width="100%" height="100%" fill="url(#c)"/>`,
+    linen: `<defs><pattern id="l" width="6" height="6" patternUnits="userSpaceOnUse"><rect width="6" height="6" fill="${color}"/><path d="M0 3h6M3 0v6" stroke="rgba(0,0,0,0.08)" stroke-width="0.5"/><path d="M1 0v6M4 0v6" stroke="rgba(0,0,0,0.04)" stroke-width="0.3"/></pattern></defs><rect width="100%" height="100%" fill="url(#l)"/>`,
+    silk: `<defs><linearGradient id="s" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="${color}"/><stop offset="35%" stop-color="${color}"/><stop offset="50%" stop-color="rgba(255,255,255,0.35)"/><stop offset="65%" stop-color="${color}"/><stop offset="100%" stop-color="${color}"/></linearGradient></defs><rect width="100%" height="100%" fill="url(#s)"/><path d="M0 80 Q50 40 100 80 T200 80" stroke="rgba(255,255,255,0.15)" stroke-width="1" fill="none"/><path d="M0 120 Q50 80 100 120 T200 120" stroke="rgba(255,255,255,0.1)" stroke-width="1" fill="none"/>`,
+    denim: `<defs><pattern id="d" width="3" height="3" patternUnits="userSpaceOnUse"><rect width="3" height="3" fill="${color}"/><path d="M0 3L3 0" stroke="rgba(255,255,255,0.08)" stroke-width="0.6"/><path d="M0 0L3 3" stroke="rgba(0,0,0,0.12)" stroke-width="0.5"/></pattern></defs><rect width="100%" height="100%" fill="url(#d)"/>`,
+    taffeta: `<defs><pattern id="t" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="${color}"/><rect x="0" y="0" width="4" height="4" fill="rgba(255,255,255,0.12)"/><rect x="4" y="4" width="4" height="4" fill="rgba(0,0,0,0.06)"/></pattern></defs><rect width="100%" height="100%" fill="url(#t)"/>`,
+    gabardine: `<defs><pattern id="g" width="5" height="5" patternUnits="userSpaceOnUse"><rect width="5" height="5" fill="${color}"/><path d="M0 5L5 0" stroke="rgba(0,0,0,0.1)" stroke-width="0.8"/><path d="M0 0L5 5" stroke="rgba(255,255,255,0.06)" stroke-width="0.4"/></pattern></defs><rect width="100%" height="100%" fill="url(#g)"/>`,
+    gauze: `<defs><pattern id="ga" width="5" height="5" patternUnits="userSpaceOnUse"><rect width="5" height="5" fill="${color}"/><circle cx="2.5" cy="2.5" r="0.8" fill="rgba(0,0,0,0.06)"/></pattern></defs><rect width="100%" height="100%" fill="url(#ga)"/>`,
+    charmeuse: `<defs><linearGradient id="ch" x1="0%" y1="0%" x2="100%" y2="50%"><stop offset="0%" stop-color="${color}"/><stop offset="30%" stop-color="${color}"/><stop offset="45%" stop-color="rgba(255,255,255,0.5)"/><stop offset="55%" stop-color="rgba(255,255,255,0.2)"/><stop offset="70%" stop-color="${color}"/><stop offset="100%" stop-color="${color}"/></linearGradient></defs><rect width="100%" height="100%" fill="url(#ch)"/>`,
+    rustic: `<defs><pattern id="r" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="${color}"/><path d="M2 0v10M7 0v10" stroke="rgba(0,0,0,0.1)" stroke-width="0.6" stroke-dasharray="2 3"/><path d="M0 2h10M0 7h10" stroke="rgba(0,0,0,0.06)" stroke-width="0.6" stroke-dasharray="3 2"/></pattern></defs><rect width="100%" height="100%" fill="url(#r)"/>`,
+    rawdenim: `<defs><pattern id="rd" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="4" fill="${color}"/><path d="M0 4L4 0" stroke="rgba(255,255,255,0.05)" stroke-width="0.8"/><path d="M0 0L4 4" stroke="rgba(0,0,0,0.15)" stroke-width="0.6"/></pattern></defs><rect width="100%" height="100%" fill="url(#rd)"/>`,
+    chiffon: `<defs><pattern id="cf" width="6" height="6" patternUnits="userSpaceOnUse"><rect width="6" height="6" fill="${color}"/><path d="M0 3h6M3 0v6" stroke="rgba(0,0,0,0.04)" stroke-width="0.4"/></pattern></defs><rect width="100%" height="100%" fill="url(#cf)"/><rect width="100%" height="100%" fill="rgba(255,255,255,0.08)"/>`,
+    tweed: `<defs><pattern id="tw" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="${color}"/><rect x="0" y="0" width="3" height="3" fill="rgba(0,0,0,0.12)"/><rect x="4" y="4" width="3" height="3" fill="rgba(0,0,0,0.08)"/><circle cx="6" cy="2" r="1" fill="rgba(255,255,255,0.08)"/><circle cx="2" cy="6" r="0.8" fill="rgba(255,255,255,0.06)"/></pattern></defs><rect width="100%" height="100%" fill="url(#tw)"/>`
+  };
+  return `<svg viewBox="0 0 300 220" preserveAspectRatio="none">${patterns[type] || patterns.cotton}</svg>`;
+}
+
+function renderFilters() {
+  document.getElementById('filters').innerHTML = cats.map(c =>
+    `<button class="pill ${c === activeCat ? 'active' : ''}" onclick="setCat('${c}')">${c}</button>`
+  ).join('');
+}
+function setCat(c) { activeCat = c; renderFilters(); render(); }
+
+function render() {
+  const q = document.getElementById('search').value.toLowerCase();
+  const list = fabrics.filter(p => {
+    const mc = activeCat === "Todos" || p.cat === activeCat;
+    const ms = p.name.toLowerCase().includes(q) || p.cat.toLowerCase().includes(q) || p.texture.toLowerCase().includes(q);
+    return mc && ms;
+  });
+  const g = document.getElementById('grid');
+  if (!list.length) {
+    g.innerHTML = `<div class="empty" style="grid-column:1/-1"><svg viewBox="0 0 24 24" fill="none"><path d="M8.00916 7.50488C8.47326 7.50488 8.91828 7.68943 9.24646 8.01758C9.57465 8.34577 9.75916 8.79075 9.75916 9.25488C9.75916 9.71901 9.57465 10.164 9.24646 10.4922C8.91828 10.8203 8.47326 11.0049 8.00916 11.0049C7.54507 11.0049 7.10001 10.8203 6.77185 10.4922C6.4437 10.164 6.25916 9.71898 6.25916 9.25488C6.25916 8.79078 6.4437 8.34576 6.77185 8.01758C7.10001 7.68942 7.54507 7.50492 8.00916 7.50488Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M17.8998 4.09961C20.0537 4.09961 21.8002 5.84609 21.8002 8V16C21.8002 18.1539 20.0537 19.9004 17.8998 19.9004H5.89978C3.74598 19.9003 1.99939 18.1538 1.99939 16V8C1.99939 5.84617 3.74598 4.09974 5.89978 4.09961H17.8998ZM15.4867 12.2539C15.448 12.2184 15.3885 12.2192 15.351 12.2559L11.7338 15.8027C11.0146 16.5079 9.87305 16.5222 9.13708 15.835L6.98669 13.8262C6.95049 13.7924 6.89516 13.791 6.85681 13.8223L3.82361 16.2988C3.96873 17.3168 4.84165 18.0995 5.89978 18.0996H17.8998C18.9375 18.0996 19.7964 17.3466 19.9662 16.3574L15.4867 12.2539ZM5.89978 5.90039C4.74009 5.90052 3.80017 6.84028 3.80017 8V14.002L5.73181 12.4238C6.46046 11.8286 7.51253 11.8634 8.20056 12.5059L10.351 14.5146C10.3897 14.5508 10.4498 14.5497 10.4877 14.5127L14.1049 10.9658C14.819 10.2656 15.9506 10.2466 16.6879 10.9219L19.9994 13.9551V8C19.9994 6.8402 19.0596 5.90039 17.8998 5.90039H5.89978Z" fill="currentColor"/></svg><div>No se encontraron telas</div></div>`;
+    return;
+  }
+  g.innerHTML = list.map(p => `
+    <div class="card">
+      <div class="swatch">${texSVG(p.color, p.texture)}<span class="tag">${p.cat}</span></div>
+      <div class="info">
+        <div class="name">${p.name}</div>
+        <div class="detail">${p.weight} · Por metro lineal</div>
+        <div class="row">
+          <div class="price">$${p.price.toLocaleString('es-MX', {minimumFractionDigits: 2})}<span>MXN</span></div>
+          <button class="btn" onclick="addToCart(${p.id})">Agregar</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function addToCart(id) {
+  cart[id] = (cart[id] || 0) + 1;
+  updateCartUI();
+  const t = document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 1600);
+}
+function changeQty(id, d) {
+  cart[id] = (cart[id] || 0) + d;
+  if (cart[id] <= 0) delete cart[id];
+  updateCartUI();
+}
+function updateCartUI() {
+  const ids = Object.keys(cart).map(Number);
+  const c = ids.reduce((s, i) => s + cart[i], 0);
+  const b = document.getElementById('badge');
+  b.textContent = c; b.style.display = c > 0 ? 'flex' : 'none';
+  const body = document.getElementById('dbody');
+  const foot = document.getElementById('dfoot');
+  if (!c) {
+    body.innerHTML = `<div class="empty"><svg viewBox="0 0 24 24" fill="none"><path d="M6 6h15l-1.5 9h-12z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="9" cy="20" r="1.2" fill="currentColor"/><circle cx="18" cy="20" r="1.2" fill="currentColor"/><path d="M6 6L5 3H2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><div>Tu selección está vacía</div><div style="font-size:12px;margin-top:4px">Explora el catálogo</div></div>`;
+    foot.style.display = 'none';
+    return;
+  }
+  foot.style.display = 'block';
+  let total = 0;
+  body.innerHTML = ids.map(id => {
+    const p = fabrics.find(x => x.id === id);
+    const q = cart[id]; total += p.price * q;
+    return `<div class="item">
+      <div class="item-thumb">${texSVG(p.color, p.texture)}</div>
+      <div class="item-info">
+        <div class="item-name">${p.name}</div>
+        <div class="item-meta">${p.weight}</div>
+        <div class="item-row">
+          <span class="item-price">$${p.price.toLocaleString('es-MX', {minimumFractionDigits: 2})}</span>
+          <div class="qty">
+            <button onclick="changeQty(${id}, -1)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M17 11.0996C17.4971 11.0996 17.9004 11.5029 17.9004 12C17.9004 12.4971 17.4971 12.9004 17 12.9004H7C6.50294 12.9004 6.09961 12.4971 6.09961 12C6.09961 11.5029 6.50294 11.0996 7 11.0996H17Z" fill="currentColor"/></svg></button>
+            <span>${q}</span>
+            <button onclick="changeQty(${id}, 1)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M12 6.09961C12.4971 6.09961 12.9004 6.50294 12.9004 7V11.0996H17C17.4971 11.0996 17.9004 11.5029 17.9004 12C17.9004 12.4971 17.4971 12.9004 17 12.9004H12.9004V17C12.9004 17.4971 12.4971 17.9004 12 17.9004C11.5029 17.9004 11.0996 17.4971 11.0996 17V12.9004H7C6.50294 12.9004 6.09961 12.4971 6.09961 12C6.09961 11.5029 6.50294 11.0996 7 11.0996H11.0996V7C11.0996 6.50294 11.5029 6.09961 12 6.09961Z" fill="currentColor"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+  document.getElementById('dtotal').textContent = '$' + total.toLocaleString('es-MX', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+}
+function toggleCart() {
+  document.getElementById('drawer').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('open');
+}
+function checkout() {
+  const ids = Object.keys(cart).map(Number);
+  if (!ids.length) return;
+  const lines = ids.map(id => {
+    const p = fabrics.find(x => x.id === id);
+    return `· ${p.name} x${cart[id]} = $${(p.price * cart[id]).toLocaleString('es-MX', {minimumFractionDigits: 2})}`;
+  }).join('\n');
+  const total = ids.reduce((s, i) => s + fabrics.find(x => x.id === i).price * cart[i], 0);
+  const msg = `Hola, quiero cotizar las siguientes telas de Telas Livingston:\n\n${lines}\n\nTotal: $${total.toLocaleString('es-MX', {minimumFractionDigits: 2})} MXN`;
+  window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+renderFilters();
+render();
+</script>
+</body>
+</html>
